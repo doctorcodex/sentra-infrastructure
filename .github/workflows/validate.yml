@@ -1,0 +1,57 @@
+name: Validate SENTRA Dashboard
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  BASE: ${{ github.workspace }}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+        cache-dependency-path: sentra/infrastructure/dashboard/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd sentra/infrastructure/dashboard
+        npm ci
+
+    - name: Build dashboard
+      run: |
+        cd sentra/infrastructure/dashboard
+        npm run build
+
+    - name: Start dashboard server
+      run: |
+        cd sentra/infrastructure/dashboard
+        npm start &
+        sleep 10
+
+    - name: Run validation script
+      env:
+        BASE: ${{ github.workspace }}
+      run: |
+        chmod +x scripts/rex_validate.sh
+        ./scripts/rex_validate.sh
+
+    - name: Check validation result
+      run: |
+        if grep -q "status: Failed" ops/health/daily.md; then
+          echo "Validation failed"
+          exit 1
+        else
+          echo "Validation passed"
+        fi
+        fi
