@@ -1,0 +1,1 @@
+Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n# manual operations policy\n\n- all rehydrate, rollup, and sync actions are owner-triggered only.\n- morning routine: manual rehydrate.\n- evening routine: manual rollup.

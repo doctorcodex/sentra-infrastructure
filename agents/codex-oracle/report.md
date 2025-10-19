@@ -1,0 +1,1 @@
+Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n# daily oracle report — YYYY-MM-DD\n- kade: -\n- rex: -\n- dexton: -\n- atlas: -\n- nova: -\n- aurora: -\n- system: version ok | mismatch?\n\n## advisor’s note (optional)\n- plain english, short sentences.
