@@ -46,6 +46,13 @@ jobs:
         chmod +x scripts/rex_validate.sh
         ./scripts/rex_validate.sh
 
+    - name: Run CRS validation script
+      env:
+        BASE: ${{ github.workspace }}
+      run: |
+        chmod +x scripts/rex_crs_validate.sh
+        ./scripts/rex_crs_validate.sh
+
     - name: Check validation result
       run: |
         if grep -q "status: Failed" ops/health/daily.md; then
