@@ -1,4 +1,3 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 """
@@ -33,11 +32,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Override tanggal (YYYY-MM-DD) untuk pengecekan")
     args = parser.parse_args()
+    base = os.getcwd()
 
     today = None
-        if args.date:
-            today = args.date
-        else:
+    if args.date:
+        today = args.date
+    else:
             sessions_dir_probe = os.path.join(base, "hub", "sessions")
             try:
                 sess = sorted([s for s in os.listdir(sessions_dir_probe) if re.match(r"\d{4}-\d{2}-\d{2}\.md$", s)])
@@ -47,7 +47,6 @@ def main():
                 today = sess[-1].replace(".md","")
             else:
                 today = datetime.date.today().strftime("%Y-%m-%d")
-    base = os.getcwd()
 
     # 1) Version mismatch
     version_path = os.path.join(base, "hub", "version.json")
