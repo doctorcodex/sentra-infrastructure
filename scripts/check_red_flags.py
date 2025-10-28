@@ -1,4 +1,7 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
+
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 """
@@ -17,6 +20,14 @@ import os, re, json, sys, argparse, datetime
 AGENTS = ["dexton","kade","rex","atlas","nova","aurora"]
 
 def read_text(path):
+    """Reads the content of a text file.
+
+    Args:
+        path: The path to the text file.
+
+    Returns:
+        The content of the file as a string, or an empty string if the file is not found.
+    """
     try:
         with open(path, "r", encoding="utf-8") as f:
             return f.read()
@@ -24,29 +35,47 @@ def read_text(path):
         return ""
 
 def list_dir(path):
+    """Lists the contents of a directory.
+
+    Args:
+        path: The path to the directory.
+
+    Returns:
+        A sorted list of the contents of the directory, or an empty list if the directory is not found.
+    """
     try:
         return sorted(os.listdir(path))
     except FileNotFoundError:
         return []
 
 def main():
+    """Checks for red flags in the repository.
+
+    This script checks for the following red flags:
+    - Version mismatch between hub/version.json and the latest session.
+    - Missing daily logs for any agent.
+    - NOTAM entries for the current day.
+    - Low completion rates in agent logs.
+
+    The script then writes a summary of the red flags to ops/health/daily.md.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Override tanggal (YYYY-MM-DD) untuk pengecekan")
     args = parser.parse_args()
 
     today = None
-        if args.date:
-            today = args.date
+    if args.date:
+        today = args.date
+    else:
+        sessions_dir_probe = os.path.join(base, "hub", "sessions")
+        try:
+            sess = sorted([s for s in os.listdir(sessions_dir_probe) if re.match(r"\d{4}-\d{2}-\d{2}\.md$", s)])
+        except FileNotFoundError:
+            sess = []
+        if sess:
+            today = sess[-1].replace(".md","")
         else:
-            sessions_dir_probe = os.path.join(base, "hub", "sessions")
-            try:
-                sess = sorted([s for s in os.listdir(sessions_dir_probe) if re.match(r"\d{4}-\d{2}-\d{2}\.md$", s)])
-            except FileNotFoundError:
-                sess = []
-            if sess:
-                today = sess[-1].replace(".md","")
-            else:
-                today = datetime.date.today().strftime("%Y-%m-%d")
+            today = datetime.date.today().strftime("%Y-%m-%d")
     base = os.getcwd()
 
     # 1) Version mismatch

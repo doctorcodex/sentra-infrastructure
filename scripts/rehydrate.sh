@@ -1,4 +1,17 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n#!/usr/bin/env bash
+#!/usr/bin/env bash
+#
+# rehydrate.sh
+#
+# Pulls the latest changes from git, displays the current version from hub/version.json,
+# and shows the latest session log. This script is intended to be used to bring a
+# new or out-of-sync repository up to date with the latest information.
+#
+# Usage:
+#   scripts/rehydrate.sh
+#
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 set -euo pipefail

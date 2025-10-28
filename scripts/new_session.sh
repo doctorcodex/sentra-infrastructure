@@ -1,4 +1,16 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n#!/usr/bin/env bash
+#!/usr/bin/env bash
+#
+# new_session.sh
+#
+# Creates a new session markdown file for a given date.
+#
+# Usage:
+#   scripts/new_session.sh            # use today's date
+#   scripts/new_session.sh 2025-10-19 # use a specific date (YYYY-MM-DD)
+#
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 set -euo pipefail
