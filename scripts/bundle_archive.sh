@@ -1,4 +1,16 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n#!/usr/bin/env bash
+#!/usr/bin/env bash
+#
+# bundle_archive.sh
+#
+# Creates a zip archive of the knowledge vault for a given month.
+#
+# Usage:
+#   scripts/bundle_archive.sh            # auto-detect month (YYYY-MM) from today's date
+#   scripts/bundle_archive.sh 2025-10    # archive for a specific month
+#
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 set -euo pipefail

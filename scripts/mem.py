@@ -1,4 +1,7 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
+
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
 """
@@ -19,6 +22,11 @@ Opsional set tanggal (override):
 import os, sys, json, datetime
 
 def today_str():
+    """Returns the current date as a string in YYYY-MM-DD format.
+
+    Returns:
+        The current date as a string.
+    """
     d = os.environ.get("MEM_DATE")
     if d:
         return d
@@ -29,6 +37,14 @@ DISCUSS_DIR = os.path.join(BASE, "hub", "discussions")
 VERSION_PATH = os.path.join(BASE, "hub", "version.json")
 
 def ensure_discussion_file(date_str):
+    """Ensures that a discussion file for the given date exists.
+
+    Args:
+        date_str: The date string in YYYY-MM-DD format.
+
+    Returns:
+        The path to the discussion file.
+    """
     os.makedirs(DISCUSS_DIR, exist_ok=True)
     path = os.path.join(DISCUSS_DIR, f"{date_str}.md")
     if not os.path.exists(path):
@@ -44,6 +60,13 @@ def ensure_discussion_file(date_str):
     return path
 
 def append_under_section(md_path, section, line):
+    """Appends a line to a section in a markdown file.
+
+    Args:
+        md_path: The path to the markdown file.
+        section: The section to append the line to.
+        line: The line to append.
+    """
     # Simple text append: ensure section exists; append under it.
     with open(md_path, "r", encoding="utf-8") as f:
         content = f.read()
@@ -60,6 +83,11 @@ def append_under_section(md_path, section, line):
         f.write(content)
 
 def load_version():
+    """Loads the version.json file.
+
+    Returns:
+        The contents of the version.json file as a dictionary, or an empty dictionary if the file does not exist.
+    """
     if os.path.exists(VERSION_PATH):
         try:
             with open(VERSION_PATH, "r", encoding="utf-8") as f:
@@ -69,28 +97,54 @@ def load_version():
     return {}
 
 def save_version(obj):
+    """Saves an object to the version.json file.
+
+    Args:
+        obj: The object to save.
+    """
     with open(VERSION_PATH, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
 def cmd_note(msg):
+    """Saves a note to the discussion file for the current day.
+
+    Args:
+        msg: The note to save.
+    """
     d = today_str()
     p = ensure_discussion_file(d)
     append_under_section(p, "notes", msg)
     print(f"[mem] note saved to {p}")
 
 def cmd_decision(msg):
+    """Saves a decision to the discussion file for the current day.
+
+    Args:
+        msg: The decision to save.
+    """
     d = today_str()
     p = ensure_discussion_file(d)
     append_under_section(p, "decisions", msg)
     print(f"[mem] decision saved to {p}")
 
 def cmd_issue(msg):
+    """Saves an issue to the discussion file for the current day.
+
+    Args:
+        msg: The issue to save.
+    """
     d = today_str()
     p = ensure_discussion_file(d)
     append_under_section(p, "issues", msg)
     print(f"[mem] issue saved to {p}")
 
 def cmd_context(key, value):
+    """Updates the context in the version.json file.
+
+    Args:
+        key: The key to update.
+        value: The new value for the key.
+    """
     d = today_str()
     v = load_version()
     # ensure credits persist
@@ -115,6 +169,7 @@ def cmd_context(key, value):
     print(f"[mem] context updated: {key} = {value}; version.json revision {rev}")
 
 def main():
+    """The main function for the memory helper script."""
     if len(sys.argv) < 3:
         print("usage: mem.py [note|decision|issue|context] <args...>", file=sys.stderr)
         sys.exit(1)

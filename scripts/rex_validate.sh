@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+#
+# rex_validate.sh
+#
+# Validates the health of the Sentra infrastructure dashboard by performing a series of checks.
+# This script is intended to be run as part of a CI/CD pipeline or manually to ensure that
+# the dashboard is functioning correctly.
+#
+# Usage:
+#   scripts/rex_validate.sh
+#
 set -euo pipefail
 
 # Use BASE environment variable if provided, otherwise detect from script location

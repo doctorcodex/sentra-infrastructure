@@ -1,4 +1,7 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\n
+Architected by doctorcodex/ drferdiiskandar
+Developed by doctorcodex/ drferdiiskandar
+
+
 #!/usr/bin/env python3
 # Architected by doctorcodex/ drferdiiskandarndar
 # Developed by doctorcodex/ drferdiiskandarndar
@@ -34,10 +37,26 @@ TEXT_EXT = {".md",".mdx",".json",".ts",".tsx",".js",".mjs",".cjs",
 SKIP_DIRS = {".git","node_modules","archives",".next","dist","build"}
 
 def is_text_file(path: str) -> bool:
+    """Checks if a file is a text file.
+
+    Args:
+        path: The path to the file.
+
+    Returns:
+        True if the file is a text file, False otherwise.
+    """
     ext = pathlib.Path(path).suffix.lower()
     return ext in TEXT_EXT
 
 def normalize_credits(content: str) -> str:
+    """Normalizes the branding and credits in a string.
+
+    Args:
+        content: The string to normalize.
+
+    Returns:
+        The normalized string.
+    """
     out = content
     # Normalize any 'Architected by doctorcodex/ drferdiiskandarNE
     out = re.sub(r'Architected by doctorcodex/ drferdiiskandar\\n]*', ARCH_LINE, out, flags=re.IGNORECASE)
@@ -63,6 +82,14 @@ def normalize_credits(content: str) -> str:
     return out
 
 def walk_files(base):
+    """Walks through all files in a directory.
+
+    Args:
+        base: The base directory to walk.
+
+    Yields:
+        The path to each file in the directory.
+    """
     for dirpath, dirnames, filenames in os.walk(base):
         # prune skip dirs
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
@@ -70,6 +97,7 @@ def walk_files(base):
             yield os.path.join(dirpath, fn)
 
 def main():
+    """Normalizes branding and credits in the repository."""
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="dry-run only")
