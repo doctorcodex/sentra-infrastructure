@@ -1,1 +1,1 @@
-Architected by doctorcodex/ drferdiiskandar\nDeveloped by doctorcodex/ drferdiiskandar\n\nThe Infrastructure Hub — Manual Rehydrate Edition (Bootstrap)\nLanguage: English (technical), designed for non-technical ownership\n\nContents mirror the Manual: memory as files, manual rhythm, legal traceability, lowercase.
+Architected by doctorcodex/ Infrastructure Hub — Manual Rehydrate Edition (Bootstrap)\nLanguage: English (technical), designed for non-technical ownership\n\nContents mirror the Manual: memory as files, manual rhythm, legal traceability, lowercase.
